@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-void selectionSort(int arr[],int n){
+void insertionSort(int arr[],int n){
     for(int i=1;i<n;i++){
         int curr=arr[i];
         int pre=i-1;
@@ -17,7 +17,7 @@ int main(){
     cin>>n;
     int arr[n];
     for(int i=0;i<n;i++)cin>>arr[i];
-    selectionSort(arr,n);
+    insertionSort(arr,n);
     for(int i=0;i<n;i++){
         cout<<arr[i]<<" ";
     }
