@@ -19,5 +19,8 @@ int main(){
         cout<<"fall"<<endl;
         break;
     }
+    string s="sdsdf";
+    cout<<s[s.size()];
+    cout<<s[s.size()-1];
     return 0;
 }
