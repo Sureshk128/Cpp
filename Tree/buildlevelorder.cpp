@@ -1,37 +1,37 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-
-class Node
-{
-public:
+class Node{
+    public:
     int data;
-    Node *left;
-    Node *right;
-    Node(int d)
-    {
-        data = d;
-        left = right = NULL;
+    Node* left;
+    Node* right;
+   
+    Node(int x){
+        data=x;
+        left=right=NULL;
     }
 };
-
-/*class Tree{
-    Node* root;
-    methods
-}
- //we will use functional approach
- */
-Node *buildTree()
-{
+Node* levelOrderBuild(){
     int d;
-    cin >> d;
-    if (d == -1)
-    {
-        return NULL;
+    cin>>d;
+    Node *root=new Node(d);
+    queue<Node*>q;
+    q.push(root);
+    while(!q.empty()){
+        Node* current=q.front();
+        q.pop();
+        int c1,c2;
+        cin>>c1>>c2;
+        if(c1!=-1){
+            current->left=new Node(c1);
+            q.push(current->left);
+        }
+        if(c2!=-1){
+            current->right=new Node(c2);
+            q.push(current->right);
+        }
     }
-    Node *n = new Node(d);
-    n->left = buildTree();
-    n->right = buildTree();
-    return n;
+    return root;
 }
 void level_Order(Node* root){
     queue<Node*>q;
@@ -68,19 +68,8 @@ int height(Node *root){
     int h2=height(root->right);
     return 1+max(h1,h2);
 }
-int Diameter(Node* root){
-    if(root==NULL){
-        return 0;
-    }
-    int D1=height(root->left)+height(root->right);
-    int D2=Diameter(root->left);
-    int D3=Diameter(root->right);
-    return max(D1,max(D2,D3));
-
-}
-int main()
-{
-    Node *root = buildTree();
-    level_Order(root);
-    cout<<"DIAMETER "<<Diameter(root);
+int main(){
+   Node* root=levelOrderBuild();
+   level_Order(root);
+   return 0;
 }
