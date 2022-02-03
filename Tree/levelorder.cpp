@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+//1 2 4 -1 -1 5 7 -1 -1 -1 3 -1 6 -1 -1
 class Node
 {
 public:
@@ -78,9 +78,35 @@ int Diameter(Node* root){
     return max(D1,max(D2,D3));
 
 }
+class HDPair{
+public:
+int height;
+int diameter;
+};
+HDPair optDiameter(Node* root){
+    HDPair p;
+    if(root==NULL){
+        p.height=p.diameter=0;
+        return p;
+    }
+    //otherwise
+    HDPair Left=optDiameter(root->left);
+    HDPair Right=optDiameter(root->right);
+
+    p.height=max(Left.height,Right.height)+1;
+
+    int D1=Left.height+Right.height;
+    int D2=Left.diameter;
+    int D3=Right.diameter;
+
+    p.diameter=max(D1,max(D2,D3));
+
+    return p;
+}
 int main()
 {
     Node *root = buildTree();
     level_Order(root);
-    cout<<"DIAMETER "<<Diameter(root);
+    cout<<"DIAMETER "<<Diameter(root)<<endl;
+    cout<<"optimised Diameter "<<optDiameter(root).diameter;
 }
